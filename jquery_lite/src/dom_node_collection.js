@@ -90,7 +90,9 @@ class DOMNodeCollection {
     return new DOMNodeCollection(selectArr); 
   }
 
-  remove() {}
+  remove() {
+    this.array.forEach( el => el.remove());
+  }
 }
 
 
