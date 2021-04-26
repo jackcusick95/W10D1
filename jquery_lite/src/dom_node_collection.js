@@ -51,6 +51,46 @@ class DOMNodeCollection {
   }
 
 
+
+  // TRAVERSAL
+  children() {
+    const childCollection = this.array.map(el => el.children); 
+    let childArr = []; 
+
+    childCollection.forEach(el => {
+      childArr = childArr.concat( Array.from(el) )
+    })
+
+    return new DOMNodeCollection(childArr); 
+  }
+  
+  parent() {
+    const parentCollection = this.array.map(el => {
+      debugger
+      return el.parentElement
+    }); 
+    let parentArr = []; 
+
+    parentCollection.forEach(el => parentArr.push(el) )
+  
+    return new DOMNodeCollection(parentArr); 
+  }
+
+  find(selector) {
+    const nodeLists = this.array.map( el => {
+      return el.querySelectorAll(`${selector}`); 
+    }); 
+
+    let selectArr = [];
+
+    nodeLists.forEach( list => {
+      selectArr = selectArr.concat(Array.from(list)); 
+    })
+
+    return new DOMNodeCollection(selectArr); 
+  }
+
+  remove() {}
 }
 
 
