@@ -17,7 +17,18 @@ class DOMNodeCollection {
     this.array.forEach( el => el.innerHTML = "" ); 
   }
 
-  append() {}
+  append(arg) {
+    // arg is $l, HTML element, or a string
+    if (arg instanceof HTMLElement || arg instanceof String) {
+      this.array.forEach( el => el.append(arg.outerHTML));
+    } else if (arg.length > 1) {
+      this.array.forEach(el => {
+        for (const argEl of arg) {
+          el.append(argEl.outerHTML);
+        } 
+      });
+    }
+  }
 
 
 
