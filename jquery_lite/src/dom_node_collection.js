@@ -30,6 +30,21 @@ class DOMNodeCollection {
     }
   }
 
+  attr(attribute, val) {
+    if (!val) {
+      return this.array[0].getAttribute(attribute);
+    } else {
+      this.array.forEach( el => el.setAttribute(attribute, val)); 
+    }
+  }
+
+  addClass(str) {
+    this.array.forEach( el => el.classList.add(str)); 
+  }
+
+  removeClass() {
+    this.array.forEach(el => el.classList.remove(str));
+  }
 
 
 
