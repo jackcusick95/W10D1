@@ -6,10 +6,10 @@ class DOMNodeCollection {
   }
 
   html(str) {
-    if (str instanceof String) {
-      this.array.forEach(el => el.innerHTML = str );  
-    } else {
+    if (!str) {
       return this.array[0].innerHTML; 
+    } else {
+      this.array.forEach(el => el.innerHTML = str );  
     }
   }
 
@@ -19,12 +19,16 @@ class DOMNodeCollection {
 
   append(arg) {
     // arg is $l, HTML element, or a string
-    if (arg instanceof HTMLElement || arg instanceof String) {
-      this.array.forEach( el => el.append(arg.outerHTML));
+    if (arg instanceof HTMLElement) {
+      this.array.forEach( el => el.innerHTML += arg.outerHTML );
+
+    } else if (typeof arg === "string") {
+      this.array.forEach( el => el.innerHTML += arg );
+
     } else if (arg.length > 1) {
       this.array.forEach(el => {
         for (const argEl of arg) {
-          el.append(argEl.outerHTML);
+          el.innerHTML += argEl.outerHTML;
         } 
       });
     }
@@ -42,10 +46,9 @@ class DOMNodeCollection {
     this.array.forEach( el => el.classList.add(str)); 
   }
 
-  removeClass() {
+  removeClass(str) {
     this.array.forEach(el => el.classList.remove(str));
   }
-
 
 
 }
