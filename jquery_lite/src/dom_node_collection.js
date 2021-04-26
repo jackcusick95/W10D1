@@ -93,6 +93,19 @@ class DOMNodeCollection {
   remove() {
     this.array.forEach( el => el.remove());
   }
+
+  on (action, func) {
+    this.func = func;
+    this.array.forEach( el => { 
+      el.addEventListener(action, this.func);
+    }); 
+  }
+
+  off (action) {
+    this.array.forEach( el => {
+      el.removeEventListener(action, this.func); 
+    });
+  }
 }
 
 
